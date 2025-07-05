@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "jobs",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -120,9 +121,12 @@ STATIC_URL = "static/"
 # REST Framework + JWT Configuration
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
+    ],
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    
+    
 }
 
 # JWT Token Settings (Optional: you can tweak this later)

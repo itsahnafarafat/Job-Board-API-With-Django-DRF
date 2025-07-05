@@ -1,7 +1,8 @@
-from rest_framework import viewsets, permissions
+from rest_framework import viewsets, permissions, filters
 from .models import JobPost, Application
 from .serializers import JobPostSerializer, ApplicationSerializer
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 class IsAdminOrReadOnly(permissions.BasePermission):
     def has_permission(self, request, view):
@@ -13,6 +14,10 @@ class JobPostViewSet(viewsets.ModelViewSet):
     queryset = JobPost.objects.all()
     serializer_class = JobPostSerializer
     permission_classes = [IsAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filerset_fields = ['location', 'company']
+    seacrh_fields = ['title', 'description', 'location', 'company']
+    ordering_fields = ['created_at', 'salary']
 
     def perform_create(self, serializer):
         serializer.save(posted_by=self.request.user)
