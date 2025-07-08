@@ -9,14 +9,14 @@ class IsAdminOrReadOnly(permissions.BasePermission):
         if request.method in permissions.SAFE_METHODS:
             return True
         return request.user and request.user.is_staff
-    
+
 class JobPostViewSet(viewsets.ModelViewSet):
     queryset = JobPost.objects.all()
     serializer_class = JobPostSerializer
     permission_classes = [IsAdminOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filerset_fields = ['location', 'company']
-    seacrh_fields = ['title', 'description', 'location', 'company']
+    filterset_fields = ['location', 'company']  # ✅ fixed spelling
+    search_fields = ['title', 'description', 'location', 'company']  # ✅ fixed spelling
     ordering_fields = ['created_at', 'salary']
 
     def perform_create(self, serializer):
@@ -29,6 +29,6 @@ class ApplicationViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Application.objects.filter(applicant=self.request.user)
-    
+
     def perform_create(self, serializer):
         serializer.save(applicant=self.request.user)
