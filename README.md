@@ -37,7 +37,8 @@ It allows companies to post jobs, and job seekers to browse listings — featuri
    ```bash
    git clone https://github.com/itsahnafarafat/Job-Board-API-With-Django-DRF.git
    cd Job-Board-API-With-Django-DRF
-````
+   ```
+
 
 2. **Create Virtual Environment:**
 
