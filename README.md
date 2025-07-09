@@ -160,13 +160,4 @@ This project is licensed under the MIT License.
 
 ````
 
----
-
-### ✅ Next Steps for You
-
-1. Add `requirements.txt`:  
-   If not already done:
-   ```bash
-   pip freeze > requirements.txt
-````
 
